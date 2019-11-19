@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import FolderList from "./Component";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,13 +80,13 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        TODAY
+        <FolderList data="3"/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        TOMORROW
+          <FolderList data="4"/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        10 DAYS
+          <FolderList data="5"/>
       </TabPanel>
     </div>
   );
