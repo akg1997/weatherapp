@@ -31,18 +31,27 @@ const lh = makeStyles({
     }
 });
 
-export default function FolderList(props) {
+const FolderList = props => {
     const classes = useStyles();
     let arr = [];
-    for(var i=0; i < props.data; i++){
-        arr.push(<ListItemComponent/>);
+    let to = 1;
+    if(props.days==='five'){
+        to = 5;
+    }console.log(props.data);
+    for(let i=0; i < to; i++){
+        arr.push(<ListItemComponent
+           day={props.data.list[0].dt_txt}
+
+        />);
     }
     return (
         <List className={classes.root}>
             {arr}
         </List>
     );
-}
+};
+export default FolderList
+
 function  ListItemComponent(props) {
     return (
         <ListItem>
