@@ -51,63 +51,27 @@ const useStyles = makeStyles(theme => ({
             },
         },
     },
-}));/*
-const classes = useStyles;
-class SearchAppBar extends React.Component {
+}));
 
-    render() {
-        return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon/>
-                            </div>
-                            <InputBase //onBlur={this.props.getWeatherForeCast}
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                inputProps={{'aria-label': 'search'}}
-                            />
-                        </div>
-                    </Toolbar>
-                </AppBar>
-            </div>
-        );
-    }
-}
-export default SearchAppBar;*/
 //38.45   40.26
 export default props => {
   const classes = useStyles();
 
   return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" style={{ background: "#00838f" }}>
           <Toolbar>
             <IconButton
                 edge="start"
                 className={classes.menuButton}
                 color="inherit"
                 aria-label="open drawer"
-            >
-              <MenuIcon />
+            ><MenuIcon />
             </IconButton>
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
+                <div className={classes.searchIcon}>
+                    <SearchIcon />
+                </div>
               <InputBase onBlur={props.getWeatherForecast}
                   placeholder="Search…"
                   classes={{

@@ -5,9 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
+import Img from "react-image";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
@@ -31,6 +29,10 @@ const lh = makeStyles({
     }
 });
 
+const iconComponent = (props) =>{
+    return <Img src={props.url} />
+}
+
 const FolderList = props => {
     const classes = useStyles();
     let arr = [];
@@ -38,12 +40,22 @@ const FolderList = props => {
     if(props.days==='five'){
         to = 5;
     }console.log(props.data);
-    for(let i=0; i < to; i++){
-        arr.push(<ListItemComponent
-           day={props.data.list[0].dt_txt}
-
-        />);
+    if(props.data){
+        console.log("defined");
+       // const jsonObject = JSON.parse(props.data);
+        for(let i=0; i < to; i++){
+            arr.push(<ListItemComponent
+                day={props.data.list[i].dt_txt}
+                weather={props.data.list[i].weather[0].main}
+                humidity={props.data.list[i].main.humidity+"%"}
+                iconUrl={"http://openweathermap.org/img/w/" + props.data.list[i].weather[0].icon + ".png"}
+                maxTemp={props.data.list[i].main.temp_max}
+                minTemp={props.data.list[i].main.temp_min}
+            />);
+        }
     }
+    //const jsonObject = JSON.parse(props.data);
+
     return (
         <List className={classes.root}>
             {arr}
@@ -66,12 +78,12 @@ function  ListItemComponent(props) {
             </Typography>
             <ListItemAvatar>
                 <Avatar>
-                    <ImageIcon />
+                    <Img src={props.iconUrl} />
                 </Avatar>
             </ListItemAvatar>
             <div>
-                <p className={lh().lineH}>{props.maxTemp}</p>
-                <p className={lh().lineH}>{props.minTemp}</p>
+                <p className={lh().lineH}>{props.maxTemp}&deg;</p>
+                <p className={lh().lineH}>{props.minTemp}&deg;</p>
             </div>
             <Divider/>
         </ListItem>
