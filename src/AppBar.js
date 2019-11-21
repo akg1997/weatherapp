@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
     },
     search: {
         position: 'relative',
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
-            width: 'auto',
+            width: '100%',
         },
     },
     searchIcon: {
@@ -41,13 +42,13 @@ const useStyles = makeStyles(theme => ({
         color: 'inherit',
     },
     inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
+        padding: theme.spacing(1, 1, 1, 2),
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            width: 120,
+            width: '70%',
             '&:focus': {
-                width: 200,
+                width: '80%',
             },
         },
     },
@@ -61,18 +62,16 @@ export default props => {
       <div className={classes.root}>
         <AppBar position="static" style={{ background: "#00838f" }}>
           <Toolbar>
-            <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-            ><MenuIcon />
-            </IconButton>
+
             <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-              <InputBase onBlur={props.getWeatherForecast}
+                <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                ><MenuIcon />
+                </IconButton>
+              <InputBase id="city"
                   placeholder="Search…"
                   classes={{
                     root: classes.inputRoot,
@@ -80,9 +79,21 @@ export default props => {
                   }}
                   inputProps={{ 'aria-label': 'search' }}
               />
+                <IconButton onClick={props.getWeatherForecast} style={{ float: "right"}}
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                ><SearchIcon />
+                </IconButton>
             </div>
           </Toolbar>
         </AppBar>
       </div>
   );
 }
+/*
+  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                </div>
+* */

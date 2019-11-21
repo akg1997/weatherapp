@@ -10,21 +10,23 @@ class App extends React.Component {
         data:undefined
     }
 
-    getCountryByName(name) {
+    getCityIDByName = (name) => {
         return cityList.filter(
             function(cityList) {
-                return cityList.name == name;
+                return cityList.name === name;
             }
         );
     }
 
     getWeatherForecast = async (e) => {
         e.preventDefault();
-        //console.log("getweatherforecast called");
-        const city = 'Gurgaon';//e.target.elements.city.value
-        const temp = this.getCountryByName(city);
+        var temp = document.getElementById('city');
         console.log(temp);
-        const city_ID = 1270642;
+        console.log(temp.value);
+        const city = 'Delhi';//e.target.elements.city.value;
+        let cityID = this.getCityIDByName(city);
+        console.log("here"+cityID);
+        const city_ID = 1273294;
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?id=${city_ID}&appid=${API_KEY}&units=metric`);
         const res = await api_call.json();
         //console.log(res);

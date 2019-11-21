@@ -66,7 +66,7 @@ export default function NavTabs(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" style={{ background: "#00838f" }}>
                 <Tabs
                     variant="fullWidth"
                     value={value}
