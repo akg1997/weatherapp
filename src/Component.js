@@ -29,32 +29,85 @@ const lh = makeStyles({
     }
 });
 
-const iconComponent = (props) =>{
-    return <Img src={props.url} />
-}
 
+const dateToDay = (dateFromAPI)=>{
+    let date = new Date(dateFromAPI);
+    // console.log(date.getDate())
+    const dict = {
+        0: "Sunday",
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thrusday",
+        5: "Friday",
+        6: "Saturday",
+    };
+    const months = ["Jan", "Feb", "Mar", "April", "May", "June", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+    let todayDate = new Date();
+    // console.log(todayDate)
+    // console.log(date.getUTCDate() === todayDate.getUTCDate());
+    // console.log("check", (todayDate.getUTCDate()+1))
+    if(todayDate.getDate() === date.getDate())
+    return "Today";
+    else if((todayDate.getDate()+1) === (date.getDate()))
+    return "Tomorrow";
+    else
+    return dict[date.getDay()]+", "+date.getDate()+" "+months[date.getMonth()];
+    
+};
+const addUTC = (dateDataFromAPI)=>{
+    return dateDataFromAPI+" UTC";
+}
+const fetchDistinctDates = (dateDataFromAPI)=>{
+    let AllDate = [];
+    dateDataFromAPI.forEach(element => {
+        // console.log(new Date(element.dt_txt).getDate())
+        AllDate.push(new Date(`${element.dt_txt} UTC`).getDate());
+    });
+    function onlyUnique(value, index, self) { 
+        return self.indexOf(value) === index;
+    }
+    
+    // // usage example:
+
+    let unique = AllDate.filter(onlyUnique);
+    return unique;
+};
 const FolderList = props => {
     const classes = useStyles();
     let arr = [];
     let to = 1;
-    if(props.days==='five'){
+    if(props.days==='tomorrow'){
+        to = 2;
+    }
+    else if(props.days==='five'){
         to = 5;
-    }console.log(props.data);
+    }
+    // console.log(props.data);
     if(props.data){
-        console.log("defined");
-       // const jsonObject = JSON.parse(props.data);
-        for(let i=0; i < to; i++){
-            arr.push(<ListItemComponent
-                day={props.data.list[i].dt_txt}
-                weather={props.data.list[i].weather[0].main}
-                humidity={props.data.list[i].main.humidity+"%"}
-                iconUrl={"http://openweathermap.org/img/w/" + props.data.list[i].weather[0].icon + ".png"}
-                maxTemp={props.data.list[i].main.temp_max}
-                minTemp={props.data.list[i].main.temp_min}
-            />);
+        const AllFiveDays = fetchDistinctDates(props.data.list);
+        let j = 0;
+        for(let i=0; i < to;){
+            let utcDate = addUTC(props.data.list[j].dt_txt);
+            let day = dateToDay(utcDate);
+            if(AllFiveDays[i]===new Date(props.data.list[j].dt_txt).getDate()){
+                arr.push(<ListItemComponent
+                    day={day}
+                    weather={props.data.list[j].weather[0].main}
+                    humidity={props.data.list[j].main.humidity+"%"}
+                    iconUrl={"http://openweathermap.org/img/w/" + props.data.list[j].weather[0].icon + ".png"}
+                    maxTemp={props.data.list[j].main.temp_max}
+                    minTemp={props.data.list[j].main.temp_min}
+                />);
+                i++;
+            }
+            j++;
+        }
+        if(props.days==='tomorrow'){
+            arr.shift();
         }
     }
-    //const jsonObject = JSON.parse(props.data);
 
     return (
         <List className={classes.root}>

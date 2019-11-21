@@ -75,7 +75,7 @@ export default function NavTabs(props) {
                 >
                     <LinkTab label="TODAY" href="/drafts" {...a11yProps(0)} />
                     <LinkTab label="TOMORROW" href="/trash" {...a11yProps(1)} />
-                    <LinkTab label="10 DAYS" href="/spam" {...a11yProps(2)} />
+                    <LinkTab label="5 DAYS" href="/spam" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
