@@ -56,41 +56,41 @@ const useStyles = makeStyles(theme => ({
 
 //38.45   40.26
 export default props => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-      <div className={classes.root}>
-        <AppBar position="static" style={{ background: "#00838f" }}>
-          <Toolbar>
+    return (
+        <div className={classes.root}>
+            <AppBar position="static" style={{background: "#00838f"}}>
+                <Toolbar>
 
-            <div className={classes.search}>
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                ><MenuIcon />
-                </IconButton>
-              <InputBase id="city"
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-              />
-                <IconButton onClick={props.getWeatherForecast} style={{ float: "right"}}
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                ><SearchIcon />
-                </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
-  );
+                    <div className={classes.search}>
+                        <IconButton
+                            edge="start"
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="open drawer"
+                        ><MenuIcon/>
+                        </IconButton>
+                        <InputBase id="city"
+                                   placeholder="Search…"
+                                   classes={{
+                                       root: classes.inputRoot,
+                                       input: classes.inputInput,
+                                   }}
+                                   inputProps={{'aria-label': 'search'}}
+                        />
+                        <IconButton onClick={props.getWeatherForecast} style={{float: "right"}}
+                                    edge="start"
+                                    className={classes.menuButton}
+                                    color="inherit"
+                                    aria-label="open drawer"
+                        ><SearchIcon/>
+                        </IconButton>
+                    </div>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 }
 /*
   <div className={classes.searchIcon}>
